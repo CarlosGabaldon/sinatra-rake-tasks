@@ -6,8 +6,8 @@
  
 = Tasks
 
-  == New project
-    $ rake sinatra:create_project
+== New project
+  $ rake sinatra:create_project
     
     
     

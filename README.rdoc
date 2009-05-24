@@ -1,0 +1,16 @@
+= Collection of Sinatra specific rake tasks
+
+  Copyright (c) 2009 Carlos Gabaldon <carlosgabaldon.com>, released under the MIT license
+ 
+  Public Clone URL:  	git://github.com/CarlosGabaldon/sinatra-rake-tasks.git
+ 
+= Tasks
+
+  == New project
+    $ rake sinatra:create_project
+    
+    
+    
+
+
+

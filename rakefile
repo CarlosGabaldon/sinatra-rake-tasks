@@ -1,0 +1,57 @@
+alias :original_directory :directory
+def directory(dir)
+  original_directory dir
+  Rake::Task[dir]
+end
+
+
+namespace :sinatra do
+  task :create_dir => [
+    directory('db'),
+    directory('public'),
+    directory('views'),
+  ]
+  
+  desc "Create the Sinatra project."
+  task :create_project => :create_dir do
+    view_files = ["edit.haml","error.haml","layout.haml", 
+            "list.haml", "not_found.haml", "view.haml"]
+            
+    rb_files = ["models.rb", "main.rb"]
+    
+    puts "Creating the Sinatra project."
+    view_files.each do |f|
+      puts "Creating view file: #{f}"
+      `touch ./views/#{f}`
+    end
+    rb_files.each do |f|
+      puts "Creating ruby file: #{f}"
+      `touch #{f}`
+      
+    end
+    
+    File.open('main.rb', 'w') do |file|  
+      file.puts "require 'rubygems'"
+      file.puts "require 'sinatra'"
+      file.puts "require 'sequel'"
+      file.puts "require 'models'\n\n" 
+      file.puts "get '/' do"
+      file.puts " haml :list"
+      file.puts "end"
+    end
+    
+    File.open('./views/layout.haml', 'w') do |file|
+      file.puts "%html"
+      file.puts "  %head"
+      file.puts "    %title Let's go.."
+      file.puts "  %body"
+      file.puts "    #container"
+      file.puts "      = yield"
+    end
+    
+    File.open('./views/list.haml', 'w') do |file|
+      file.puts "%h2 Sinatra is taking orders.."
+    end
+    
+  end
+end

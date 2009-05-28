@@ -8,6 +8,9 @@
 
 == New project
   $ rake sinatra:create_project
+  
+== Seed the database
+  $ rake sinatra:seed_db
     
     
     

@@ -17,7 +17,7 @@ namespace :sinatra do
     view_files = ["edit.haml","error.haml","layout.haml", 
             "list.haml", "not_found.haml", "view.haml"]
             
-    rb_files = ["models.rb", "main.rb"]
+    rb_files = ["models.rb", "main.rb", "./db/seeds.rb"]
     
     puts "Creating the Sinatra project."
     view_files.each do |f|
@@ -52,6 +52,14 @@ namespace :sinatra do
     File.open('./views/list.haml', 'w') do |file|
       file.puts "%h2 Sinatra is taking orders.."
     end
-    
   end
+  
+  desc 'Load the seed data from db/seeds.rb'
+  task :seed_db do
+    seed_file = "./db/seeds.rb"
+    puts "Seeding database from: #{seed_file}"
+    load(seed_file) if File.exist?(seed_file)
+  end
+  
+  
 end
